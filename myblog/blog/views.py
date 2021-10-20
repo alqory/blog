@@ -31,7 +31,7 @@ def update(request, id):
     data = blog.objects.get(id=id)
     
     form = blogForm(instance=data)
-    
+
     if request.method == 'POST':
         form = blogForm(request.POST or None, instance=data)
         if form.is_valid():
@@ -43,5 +43,7 @@ def update(request, id):
     }
     return render(request,'update.html',context)
 
-def hapus(request):
-    pass
+def hapus(request,id):
+    data = blog.objects.get(id=id)
+    data.delete()
+    return redirect('blog:index')

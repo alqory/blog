@@ -7,4 +7,5 @@ urlpatterns = [
     path('',views.index,name='index'),
     path('tambah',views.tambah,name='tambah'),
     path('update/<id>',views.update,name='update'),
+    path('hapus/<id>',views.hapus,name='hapus'),
 ]
