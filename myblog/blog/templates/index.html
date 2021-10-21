@@ -1,15 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Blog</h1>
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock title%}
+
+{% block content %}
+    <div class="container mx-auto ">
+        <div class="text-center ">
+        {% for DataKategori in blog %}
+            <a class="border-2 p-3 rounded-lg font-semibold" href="{% url 'blog:kategori' Kategori_input=DataKategori.category %}">{{DataKategori.category}}</a>      
+        {% endfor %}
+        </div>
+    </div>
+    
+    <div class="container flex">
+        <div class="big">
+            
+        </div>
+        <div class="small">
+            <div class="">
+                hendri
+            </div>
+            <div class="">
+                Hendri
+            </div>
+        </div>
+    </div>
     {% for blogs in blog %}
-        {{forloop.counter}}. {{blogs.title}} <br>
+        {{forloop.counter}}. <a href="{% url 'blog:detail' blogs.id %}">{{blogs.title}}</a> <br>
     {% endfor %}
-</body>
-</html>
+{% endblock content %}
+    

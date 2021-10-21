@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    {% for DataKategori in blog %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'blog:kategori' Kategori_input=DataKategori.category %}">{{DataKategori.category}}</a>      
+        </li>
+    {% endfor %}
+
+    <h1>TEst</h1>
+    {% for kategori in kat %}
+        <a href="{% url 'blog:detail' kategori.id %}">{{kategori.title}}</a>  
+    {% endfor %}
+</body>
+</html>

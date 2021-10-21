@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/tailwind/dist/tailwind.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css">
+    <title>Navbar</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@300&display=swap');
+
+    *{
+        font-family: 'Mukta', sans-serif;
+        font-size: large;
+        
+    }
+    body {
+        height: 10000px;
+    }
+    input {
+        border:1px solid gray;
+        outline: none;
+    }
+    i {
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        color: gray;
+    }
+    
+</style>
+<body>
+        <div class="mx-auto pt-5 pb-4 fixed flex justify-around font-sans items-center w-full border-2">
+            <div class="h-8 ">
+                <a href="">My blogs</a>
+            </div>
+            <div class="relative">
+                <i class="fas fa-search"></i><input class="focus:outline-none focus:ring focus:border-blue-300 rounded-full h-8 text-center" type="text" placeholder="Keyword">
+            </div>
+            <div class="bg-yellow-500 text-center w-20 rounded-md text-gray-50 font-semibold ">
+                <a href="">Login</a>
+         </div>
+    </div>    
+</body>
+</html>

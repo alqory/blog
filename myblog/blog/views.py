@@ -7,8 +7,13 @@ from .forms import *
 def index(request):
     
     blogs = blog.objects.all()
+    kategori = blog.objects.values('category').distinct()
 
-    context = {'blog':blogs}
+    context = {
+        'blog':blogs,
+        'kat':kategori
+        }
+
 
     return render(request,'index.html',context)
 
@@ -47,3 +52,27 @@ def hapus(request,id):
     data = blog.objects.get(id=id)
     data.delete()
     return redirect('blog:index')
+
+def detail_post(request,id_detail):
+
+    blogs = blog.objects.get(id=id_detail)
+
+    context = {
+        'post':blogs,
+    }
+
+    return render(request,'detail_post.html',context)
+
+
+def kategori(request, Kategori_input):
+       
+    kategori = blog.objects.filter(category=Kategori_input)
+    blogs = blog.objects.values('category').distinct()
+
+    context = {
+        'blog':blogs,
+        'kat':kategori
+        }
+
+
+    return render(request,'kategori_post.html',context)

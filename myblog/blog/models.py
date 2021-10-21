@@ -14,3 +14,12 @@ class blog(models.Model):
 
     def __str__(self):
         return "{} - {} ".format(self.title,self.author)
+
+class commentSession(models.Model):
+    blog = models.ForeignKey(blog, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    text = models.TextField(max_length=120)
+    time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "{} - {}".format(self.name, self.blog)
