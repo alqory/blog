@@ -1,5 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
+from datetime import datetime
 
 # Create your models here.
 
@@ -11,6 +12,10 @@ class blog(models.Model):
     is_recomended   = models.BooleanField(default=False)
     create          = models.DateTimeField(auto_now_add=True)
     update          = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        self.create = datetime.now()
+        super(blog, self).save(*args, **kwargs)
 
     def __str__(self):
         return "{} - {} ".format(self.title,self.author)

@@ -19,6 +19,11 @@
     body {
         height: 10000px;
     }
+    .nav {
+        background-color: white;
+        /* filter: blur(8px);
+    -webkit-filter: blur(8px); */
+    }
     input {
         border:1px solid gray;
         outline: none;
@@ -29,19 +34,40 @@
         left: 20px;
         color: gray;
     }
+
+    @media(max-width:768px) {
+        i{
+            left: 13px;
+            font-size: medium;
+            color: rgb(66, 65, 65);
+        }
+    }
+    @media(max-width:500px) {
+        i{
+            left: 13px;
+            font-size: medium;
+            color: rgb(66, 65, 65);
+        }
+    }
     
 </style>
 <body>
-        <div class="mx-auto pt-5 pb-4 fixed flex justify-around font-sans items-center w-full border-2">
-            <div class="h-8 ">
+        <div class="nav mx-auto py-4 fixed flex justify-around font-sans items-center w-full border-2 z-50">
+            <div class="h-8 z-50">
                 <a href="">My blogs</a>
             </div>
-            <div class="relative">
-                <i class="fas fa-search"></i><input class="focus:outline-none focus:ring focus:border-blue-300 rounded-full h-8 text-center" type="text" placeholder="Keyword">
+            <div class="relative z-50">
+                <i class="fas fa-search"></i><input class="focus:outline-none focus:ring focus:border-blue-300 rounded-full w-28 text-center md:w-full h-8" type="text" placeholder="  Keyword">
             </div>
-            <div class="bg-yellow-500 text-center w-20 rounded-md text-gray-50 font-semibold ">
+            <div class="bg-yellow-500 p-1 mr-2 text-center rounded-md text-gray-50 font-semibold md:w-20 z-50">
                 <a href="">Login</a>
          </div>
     </div>    
+    <!-- <script>
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scrollup',() => {
+            nav.style.display = 'none';
+        });
+    </script> -->
 </body>
 </html>
