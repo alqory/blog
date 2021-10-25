@@ -21,7 +21,7 @@
     </style>
     <div class="container mx-auto flex justify-center items-center ">
         <div class="nav p-1 rounded-full  flex justify-center items-center gap-1 md:w-96">
-        {% for DataKategori in blog %}
+        {% for DataKategori in kat %}
             <a class="relative rounded-full p-2" href="{% url 'blog:kategori' Kategori_input=DataKategori.category %}">{{DataKategori.category}}</a>      
         {% endfor %}
         </div>
@@ -96,8 +96,8 @@
         </div>
 
     </div>
-    <!-- {% for blogs in blog %}
-        {{forloop.counter}}. <a href="{% url 'blog:detail' blogs.id %}">{{blogs.title}}</a> <br>
+    {% for blogs in blog %}
+        {{forloop.counter}}. <a href="{% url 'blog:detail' blogs.slug %}"><h1>{{blogs.title}}</h1></a><br>
     {% endfor %}
-{% endblock content %} -->
+{% endblock content %}
     

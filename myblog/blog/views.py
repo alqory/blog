@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from .models import *
 from .forms import *
 # Create your views here.
@@ -53,9 +52,9 @@ def hapus(request,id):
     data.delete()
     return redirect('blog:index')
 
-def detail_post(request,id_detail):
+def detail_post(request,slug_input):
 
-    blogs = blog.objects.get(id=id_detail)
+    blogs = blog.objects.get(slug=slug_input)
 
     context = {
         'post':blogs,
@@ -64,13 +63,13 @@ def detail_post(request,id_detail):
     return render(request,'detail_post.html',context)
 
 
-def kategori(request, Kategori_input):
+def kategori(request,Kategori_input):
        
     kategori = blog.objects.filter(category=Kategori_input)
-    blogs = blog.objects.values('category').distinct()
+    # blogs = blog.objects.values('category').distinct()
 
     context = {
-        'blog':blogs,
+        # 'blog':blogs,
         'kat':kategori
         }
 

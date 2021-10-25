@@ -20,13 +20,15 @@
         height: 10000px;
     }
     .nav {
-        background-color: white;
+        backdrop-filter: blur(6px);
         /* filter: blur(8px);
     -webkit-filter: blur(8px); */
     }
     input {
+        background: none;
         border:1px solid gray;
         outline: none;
+        backdrop-filter: blur(6px);
     }
     i {
         position: absolute;
@@ -52,7 +54,7 @@
     
 </style>
 <body>
-        <div class="nav mx-auto py-4 fixed flex justify-around font-sans items-center w-full border-2 z-50">
+        <div class="nav mx-auto py-4 fixed flex justify-around font-sans items-center w-full  z-50">
             <div class="h-8 z-50">
                 <a href="">My blogs</a>
             </div>
@@ -63,11 +65,11 @@
                 <a href="">Login</a>
          </div>
     </div>    
-    <!-- <script>
+    <script>
         const nav = document.querySelector('.nav');
-        window.addEventListener('scrollup',() => {
-            nav.style.display = 'none';
+        window.addEventListener('scroll',() => {
+            nav.style.border = 'none';
         });
-    </script> -->
+    </script>
 </body>
 </html>

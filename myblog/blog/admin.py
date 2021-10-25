@@ -7,7 +7,7 @@ from .models import *
 
 class AdminBlog(admin.ModelAdmin):
     model = blog
-    readonly_fields = ['create','update']
+    readonly_fields = ['create','update','slug']
 
 class comment(admin.ModelAdmin):
     model = commentSession
