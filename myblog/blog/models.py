@@ -6,9 +6,11 @@ from datetime import datetime
 # Create your models here.
 
 class blog(models.Model):
-    title           = models.CharField(max_length=123)
+    title           = models.CharField(max_length=100)
+    title2          = models.CharField(max_length=60)
     author          = models.CharField(max_length=50)
     describ         = RichTextField(blank=True, null=True)
+    images          = models.ImageField(upload_to='cover/',null=True)
     category        = models.CharField(max_length=50)
     is_recomended   = models.BooleanField(default=False)
     create          = models.DateTimeField(auto_now_add=True)
