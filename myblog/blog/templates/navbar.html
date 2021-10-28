@@ -16,9 +16,7 @@
         font-size: large;
         
     }
-    body {
-        height: 10000px;
-    }
+
     .nav {
         backdrop-filter: blur(6px);
         /* filter: blur(8px);
@@ -56,7 +54,7 @@
 <body>
         <div class="nav mx-auto py-4 fixed flex justify-around font-sans items-center w-full  z-50">
             <div class="h-8 z-50">
-                <a href="">My blogs</a>
+                <a href="{% url 'blog:index' %}">My blogs</a>
             </div>
             <div class="relative z-50">
                 <i class="fas fa-search"></i><input class="focus:outline-none focus:ring focus:border-blue-300 rounded-full w-28 text-center md:w-full h-8" type="text" placeholder="  Keyword">

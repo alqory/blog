@@ -1,13 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Detailpost</h1>
-    {{post.title}} - {{post.author}}
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+    Detail Post
+{% endblock title %}
+<style>
+
+</style>
+
+{% block content %}
+    <div class="container mx-auto border-5">
+        <div class="flex flex-col gap-5 md:flex-row ">
+            <div class="flex flex-col w-full  border-2 md:w-4/6">
+                <div class="flex justify-center items-center rounded-lg p-4">
+                    {% if post.images %}
+                    <img class="" src="{{ post.images.url }}" width="100%">                  
+                    {% endif %}
+                </div>
+                <h1 class="text-4xl text-center underline mb-5 p-5">{{post.title}} - {{post.author}} </h1>
+                <p class="ml-6 font-bold">{{post.create}}</p>
+                <p class="p-5">{{post.describ}}</p>
+            </div>
+            <div class="w-full border-2 md:w-2/6 ">
+                test
+            </div>
+        </div>
+      
+    </div>
+{% endblock content %}
+
