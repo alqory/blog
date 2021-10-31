@@ -55,9 +55,21 @@ def hapus(request,id):
 def detail_post(request,slug_input):
 
     blogs = blog.objects.get(slug=slug_input)
+    
+    if request.method == 'POST':
+        formComment = commentForm(request.POST)
+        if formComment.is_valid():
+            obj = formComment.save(commit=False)
+            obj.blog = blogs
+            obj.save()
+
+            return redirect('blog:detail', slug_input)
+    else :
+        formComment = commentForm()
 
     context = {
         'post':blogs,
+        'comment':formComment,
     }
 
     return render(request,'detail_post.html',context)

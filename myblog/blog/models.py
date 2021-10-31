@@ -1,7 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.utils.text import slugify
-from datetime import datetime
 
 # Create your models here.
 
@@ -26,7 +25,7 @@ class blog(models.Model):
         return "{} - {} ".format(self.title,self.author)
 
 class commentSession(models.Model):
-    blog = models.ForeignKey(blog, on_delete=models.CASCADE)
+    blog = models.ForeignKey(blog,related_name='comments', on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     text = models.TextField(max_length=120)
     time = models.DateTimeField(auto_now_add=True)

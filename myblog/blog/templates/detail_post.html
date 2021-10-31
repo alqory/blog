@@ -10,18 +10,30 @@
 {% block content %}
     <div class="container mx-auto border-5">
         <div class="flex flex-col gap-5 md:flex-row ">
-            <div class="flex flex-col w-full  border-2 md:w-4/6">
-                <div class="flex justify-center items-center rounded-lg p-4">
+            <div class="flex flex-col w-full  md:w-4/6">
+                <div class="flex justify-center items-center rounded-lg">
                     {% if post.images %}
-                    <img class="" src="{{ post.images.url }}" width="100%">                  
+                    <img class="rounded-lg" src="{{ post.images.url }}" width="100%">                  
                     {% endif %}
                 </div>
                 <h1 class="text-4xl text-center underline mb-5 p-5">{{post.title}} - {{post.author}} </h1>
                 <p class="ml-6 font-bold">{{post.create}}</p>
-                <p class="p-5">{{post.describ}}</p>
+                <p class="p-5">{{post.describ | safe | linebreaks}}</p>
             </div>
             <div class="w-full border-2 md:w-2/6 ">
-                test
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{comment.as_p}}
+                    <button type="submit">Kirim</button>
+                </form>
+                <div class="bg-red-500">
+                    {% for com in obj.comments.all %}
+                        {{com.name}}
+                    {% endfor %}
+                <h1>udhwudhwud</h1> 
+                    <p>dqwdqwdqw</p>
+                    teuhou
+                </div>
             </div>
         </div>
       

@@ -78,13 +78,21 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dbblog',
+        'NAME': 'dbmyblog',
         'USER': 'postgres',
         'PASSWORD': '123456',
         'HOST': 'localhost',
     }
 }
 
+# import psycopg2.extensions
+
+# DATABASES = {
+#     # ...
+#     'OPTIONS': {
+#         'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE,
+#     },
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
