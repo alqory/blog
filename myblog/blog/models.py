@@ -5,8 +5,7 @@ from django.utils.text import slugify
 # Create your models here.
 
 class blog(models.Model):
-    title           = models.CharField(max_length=100)
-    title2          = models.CharField(max_length=60)
+    title           = models.CharField(max_length=200)
     author          = models.CharField(max_length=50)
     describ         = RichTextField(blank=True, null=True)
     images          = models.ImageField(upload_to='cover/',null=True)
@@ -18,7 +17,10 @@ class blog(models.Model):
 
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        if len(self.title) > 50:
+            content = slugify(self.title[:50]) 
+        
+        self.slug = content
         super(blog, self).save(*args, **kwargs)
 
     def __str__(self):

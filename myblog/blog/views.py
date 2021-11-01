@@ -1,15 +1,20 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
+from django.core.paginator import Paginator
 # Create your views here.
 
 def index(request):
     
     blogs = blog.objects.all()
+    paginator = Paginator(blogs, 4)
     kategori = blog.objects.values('category').distinct()
 
+    page_number = request.GET.get('page',1)
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'blog':blogs,
+        'blog':page_obj,
         'kat':kategori
         }
 
