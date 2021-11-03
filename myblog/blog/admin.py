@@ -1,9 +1,7 @@
 from django.contrib import admin
 from .models import *
 
-# Register your models here.
-
-
+# Register your models here
 
 class AdminBlog(admin.ModelAdmin):
     model = blog
@@ -15,3 +13,4 @@ class comment(admin.ModelAdmin):
 
 admin.site.register(blog,AdminBlog)
 admin.site.register(commentSession, comment)
+admin.site.register(kategori)

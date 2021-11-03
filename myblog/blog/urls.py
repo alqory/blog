@@ -9,5 +9,5 @@ urlpatterns = [
     path('update/<id>',views.update,name='update'),
     path('hapus/<id>',views.hapus,name='hapus'),
     path('detail/<slug_input>',views.detail_post,name='detail'),
-    path('kategori/<Kategori_input>',views.kategori,name='kategori'),
+    path('kategori/<Kategori_input>',views.kategories,name='kategori'),
 ]

@@ -3,11 +3,14 @@
 {% block title %}
     Detail Post
 {% endblock title %}
-<style>
-
-</style>
 
 {% block content %}
+<style>
+    .kanan {
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    }
+</style>
+
     <div class="container mx-auto border-5">
         <div class="flex flex-col gap-5 md:flex-row ">
             <div class="flex flex-col w-full  md:w-4/6">
@@ -20,23 +23,33 @@
                 <p class="ml-6 font-bold">{{post.create}}</p>
                 <p class="p-5">{{post.describ | safe | linebreaks}}</p>
             </div>
-            <div class="w-full border-2 md:w-2/6 ">
-                <form action="" method="post">
-                    {% csrf_token %}
-                    {{comment.as_p}}
-                    <button type="submit">Kirim</button>
-                </form>
-                <div class="bg-red-500">
-                    {% for com in obj.comments.all %}
-                        {{com.name}}
-                    {% endfor %}
-                <h1>udhwudhwud</h1> 
-                    <p>dqwdqwdqw</p>
-                    teuhou
-                </div>
+            <div class="kanan w-full md:w-2/6 ">
+              <p>Terbaru.</p>
+              {% for ter in terkait %}
+              <div class="flex p-2 gap-3 border-b-2">
+                  {% if ter.images %}
+                  <img class="rounded-lg" src="{{ ter.images.url }}" alt="" width="20%">
+                  {% endif %}
+                  <a href="{% url 'blog:detail' ter.slug %}"><p class="text-sm hover:underline">{{ter.title}}</p></a>
+                  
+              </div>
+              {% endfor %}
             </div>
         </div>
       
     </div>
 {% endblock content %}
 
+  <!-- <form action="" method="post">
+                    {% csrf_token %}
+                    {{comment.as_p}}
+                    <button type="submit">Kirim</button>
+                </form> -->
+                <!-- <div class="bg-red-500">
+                    {% for com in obj.comments.all %}
+                        {{com.name}}
+                    {% endfor %}
+                <h1>udhwudhwud</h1> 
+                    <p>dqwdqwdqw</p>
+                    teuhou
+                </div> -->

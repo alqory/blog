@@ -24,8 +24,9 @@ def index(request):
 
     
     blogs = blog.objects.all().order_by('id')
+    category = kategori.objects.all()
     paginator = Paginator(blogs, 4)
-    kategori = blog.objects.values('category').distinct()
+    
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -33,7 +34,7 @@ def index(request):
     context = {
         'data':pypload,
         'blog':page_obj,
-        'kat':kategori
+        'kat':category
         }
 
 
@@ -77,8 +78,10 @@ def hapus(request,id):
 
 def detail_post(request,slug_input):
 
-    blogs = blog.objects.get(slug=slug_input)
     
+    blogs = blog.objects.get(slug=slug_input)
+    terkait = blog.objects.all().order_by('-create')[:5]
+    # 
     if request.method == 'POST':
         formComment = commentForm(request.POST)
         if formComment.is_valid():
@@ -93,19 +96,22 @@ def detail_post(request,slug_input):
     context = {
         'post':blogs,
         'comment':formComment,
+        'terkait':terkait,
     }
 
     return render(request,'detail_post.html',context)
 
 
-def kategori(request,Kategori_input):
+def kategories(request,Kategori_input):
        
     kategori = blog.objects.filter(category=Kategori_input)
-    # blogs = blog.objects.values('category').distinct()
+    q = blog.objects.filter(category=Kategori_input).distinct('category')
+
 
     context = {
         # 'blog':blogs,
-        'kat':kategori
+        'kat':kategori,
+        'title':q
         }
 
 
