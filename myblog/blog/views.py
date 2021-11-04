@@ -23,9 +23,10 @@ def index(request):
 
 
     
-    blogs = blog.objects.all().order_by('id')
+    blogs = blog.objects.all().order_by('-id')[1:]
+    banner = blog.objects.all()[0]
     category = kategori.objects.all()
-    paginator = Paginator(blogs, 4)
+    paginator = Paginator(blogs, 8)
     
 
     page_number = request.GET.get('page')
@@ -34,7 +35,8 @@ def index(request):
     context = {
         'data':pypload,
         'blog':page_obj,
-        'kat':category
+        'kat':category,
+        'banner':banner,
         }
 
 
@@ -80,7 +82,7 @@ def detail_post(request,slug_input):
 
     
     blogs = blog.objects.get(slug=slug_input)
-    terkait = blog.objects.all().order_by('-create')[:5]
+    terkait = blog.objects.all().order_by('-create')[1:6]
     # 
     if request.method == 'POST':
         formComment = commentForm(request.POST)
@@ -104,13 +106,13 @@ def detail_post(request,slug_input):
 
 def kategories(request,Kategori_input):
        
-    kategori = blog.objects.filter(category=Kategori_input)
-    q = blog.objects.filter(category=Kategori_input).distinct('category')
+    q = kategori.objects.filter(id=Kategori_input)
+    kategoris = blog.objects.filter(category=Kategori_input)
+
 
 
     context = {
-        # 'blog':blogs,
-        'kat':kategori,
+        'kat':kategoris,
         'title':q
         }
 

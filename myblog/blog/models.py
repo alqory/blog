@@ -19,14 +19,15 @@ class blog(models.Model):
     is_recomended   = models.BooleanField(default=False)
     create          = models.DateTimeField(auto_now_add=True)
     update          = models.DateTimeField(auto_now=True)
-    slug            = models.SlugField()
+    slug            = models.SlugField(max_length=225)
 
 
-    # def get_absoulte_url(self):
+    class Meta:
+        ordering = ['-create']
 
     def save(self, *args, **kwargs):
         if len(self.title) > 50:
-            content = slugify(self.title[:50]) 
+            content = slugify(self.title) 
         self.slug = content
         super(blog, self).save(*args, **kwargs)
 

@@ -16,11 +16,17 @@
         font-size: large;
         
     }
+    .brand{
+        font-size:1cm;
+        font-weight: bolder;
+        color: tomato;
+        border: 1px solid tomato;
+        border-radius: 10px;
+        padding: 5px;
+    }
 
     .nav {
         backdrop-filter: blur(6px);
-        /* filter: blur(8px);
-    -webkit-filter: blur(8px); */
     }
     input {
         background: none;
@@ -53,8 +59,8 @@
 </style>
 <body>
         <div class="nav mx-auto py-4 fixed flex justify-around font-sans items-center w-full  z-50">
-            <div class="h-8 z-50">
-                <a href="{% url 'blog:index' %}">My blogs</a>
+            <div class="z-50">
+                <a class="brand" href="{% url 'blog:index' %}">Tricky.</a>
             </div>
             <div class="relative z-50">
                 <i class="fas fa-search"></i><input class="focus:outline-none focus:ring focus:border-blue-300 rounded-full w-28 text-center md:w-full h-8" type="text" name="cari" placeholder="  Keyword">

@@ -2,7 +2,7 @@
 
 {% block title %}
 {% for nav in title %}
-    Kategori - {{nav.category}}
+    {{nav.name}}
     {% endfor %}
 {% endblock title %}
 
@@ -27,7 +27,7 @@
     <div class="container mx-auto flex justify-center items-center ">
         <div class="navigasi p-2 rounded-full flex justify-center items-center gap-2">
             {% for nav in title %}
-            <p class="relative rounded-full  md:p-1">{{nav.category}}</p>      
+            <p class="relative rounded-full md:p-1">{{nav.name}}</p>      
             {% endfor %}
         </div>
     </div>
