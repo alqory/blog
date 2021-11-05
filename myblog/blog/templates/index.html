@@ -51,7 +51,7 @@
             border: 1px solid;
         }
         .banner {
-            backdrop-filter: blur(6px);
+            backdrop-filter: blur(1px);
         }
     </style>
     <div class="container mx-auto flex justify-center items-center ">
@@ -69,27 +69,37 @@
                 {% if banner.images %}
                 <img class="opacity-75 " src="{{ banner.images.url }}" alt="" width="100%">
                 <div class="">
-                    <a href="{% url 'blog:detail' banner.slug %}"><p class="banner p-2 absolute bottom-0 text-sm font-semibold hover:underline sm:text-3xl">{{banner.title}}</p></a>
+                    <a href="{% url 'blog:detail' banner.slug %}"><p class="banner p-2 absolute bottom-2 text-white text-base font-medium hover:underline sm:text-3xl">{{banner.title}} | {{banner.author}}</p></a>
                 </div>     
                 {% endif %}
             </div>
             
             <div class="w-full xl:w-2/6 ">
                 <div class="flex flex-row gap-4 xl:flex-col">
-                        <div class="cuaca flex flex-col rounded-md sm:flex-row">
-                            <div class="hidden sm:block">
-                                <img class="" src="http://openweathermap.org/img/wn/{{data.ikon}}.png" alt="" width="100px">
+                    <div class="cuaca flex flex-col rounded-md sm:flex-row">
+                        <div class="hidden sm:block">
+                            <img class="" src="http://openweathermap.org/img/wn/{{data.ikon}}.png" alt="" width="100px">
+                        </div>
+                        <div class="p-1">
+                            <p class=" font-bold">{{data.kota}} ({{data.kondisi}})</p>
+                            <p class="">Temperatur : {{data.temperatur}} °C</p>
+                            <p class="">Kecepatan Angin : {{data.kecepatan_angin}} m/detik</p>
+                            <p class="">Tekanan Udara : {{data.tekanan_udara}} hPa</p>
+                        </div>
+                    </div>
+                    <div class="">
+                        {% for ter in banner2 %}
+                        <div class="flex flex-row gap-2 mb-4 border-b-2 pb-1">
+                            <div class="">
+                                {% if ter.images %}
+                                <img class="rounded-md" src="{{ ter.images.url }}" alt="" width="200px">
+                                {% endif %}
                             </div>
-                            <div class="p-1">
-                                <p class=" font-bold">{{data.kota}} ({{data.kondisi}})</p>
-                                <p class="">Temperatur : {{data.temperatur}} °C</p>
-                                <p class="">Kecepatan Angin : {{data.kecepatan_angin}} m/detik</p>
-                                <p class="">Tekanan Udara : {{data.tekanan_udara}} hPa</p>
+                            <div class="">
+                                <a href="{% url 'blog:detail' ter.slug %}"><p class="text-sm hover:underline">{{ter.title}}</p></a>
                             </div>
                         </div>
-
-                    <div>
-                        ascascaec
+                        {% endfor %}
                     </div>
                 </div>
               
@@ -101,6 +111,8 @@
     
     
     <div class="main container mx-auto mt-10 ">
+       <p class="text-lg font-semibold "> {{Kata}}</p> 
+       
         <div class="grid grid-cols-2 my-9 gap-4 justify-items-center relative md:grid-cols-4">
             {% for content in blog %}
             <div class="card relative block">

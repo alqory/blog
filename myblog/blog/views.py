@@ -19,24 +19,44 @@ def index(request):
         'tekanan_udara':data['main']['pressure'],
         'kondisi':data['weather'][0]['main']
         }
-    print(pypload)
 
 
-    
-    blogs = blog.objects.all().order_by('-id')[1:]
-    banner = blog.objects.all()[0]
-    category = kategori.objects.all()
-    paginator = Paginator(blogs, 8)
-    
+    if request.method == 'POST':
+        kata_kunci = request.POST['cari']
 
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+        cari = blog.objects.filter(title__contains = kata_kunci)
+        banner = blog.objects.all()[0]
+        category = kategori.objects.all()
+        paginator = Paginator(cari, 12)
 
-    context = {
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        context = {
+            'data':pypload,
+            'blog':page_obj,
+            'kat':category,
+            'banner':banner,
+            'Kata' : f'Menampilkan pencarian yang paling relevan " {kata_kunci} " '
+        }
+    else :
+
+        blogs = blog.objects.all().order_by('-id')[3:]
+        banner = blog.objects.all()[0]
+        banner2 = blog.objects.all()[1:3]
+        category = kategori.objects.all()
+        paginator = Paginator(blogs, 8)
+
+
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        context = {
         'data':pypload,
         'blog':page_obj,
         'kat':category,
         'banner':banner,
+        'banner2':banner2
         }
 
 
