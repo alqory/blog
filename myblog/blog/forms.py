@@ -13,11 +13,12 @@ class commentForm(forms.ModelForm):
         fields = ['name','text']
         widgets = {
             'name' : TextInput(attrs={
-                'class': 'grid grid-cols-1 rounded-lg w-full p-1 bg-white outline-none focus:border-blue-300',
+                'class': 'grid grid-cols-1 rounded-lg w-full  p-1 bg-white outline-none focus:border-blue-300',
                 'placeholder': 'Nama Lengkap'
             }),
-            'text' : Textarea(attrs={
-                'class': 'grid grid-cols-1 rounded-lg border-2 focus:border-blue-300'
+            'text' : TextInput(attrs={
+                'class': 'grid grid-cols-1 rounded-lg w-full p-7 border-2 focus:border-blue-300',
+                'placeholder' : 'Your comment . . .'
             })
         }
         
