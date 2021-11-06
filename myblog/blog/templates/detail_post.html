@@ -9,8 +9,8 @@
     .kanan {
         box-shadow: rgba(32, 31, 97, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     }
-    .post {
-        background: linear-gradient(rgb(43, 34, 59),rgb(49, 49, 134));
+    .post, .button {
+        background: linear-gradient(rgb(43, 34, 59),rgb(80, 36, 61));
         color: white;
     }
 </style>
@@ -53,25 +53,12 @@
                         <p class="text-sm mb-1 font-medium">{{comment.text.label}}</p>
                         {{comment.text}}
                        </div>
-                       <button class="p-1 rounded-md mx-2 my-2 bg-blue-900 text-white" type="submit">Kirim</button>
+                       <button class="button p-1 rounded-md mx-2 my-2" type="submit">Kirim</button>
                    </form> 
                 </div>
 
             </div>
         </div>
     </div>
+    {% include 'footer.html' %} 
 {% endblock content %}
-
-  <!-- <form action="" method="post">
-                    {% csrf_token %}
-                    {{comment.as_p}}
-                    <button type="submit">Kirim</button>
-                </form> -->
-                <!-- <div class="bg-red-500">
-                    {% for com in obj.comments.all %}
-                        {{com.name}}
-                    {% endfor %}
-                <h1>udhwudhwud</h1> 
-                    <p>dqwdqwdqw</p>
-                    teuhou
-                </div> -->

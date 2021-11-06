@@ -8,21 +8,26 @@
 
 {% block content %}
 
-        <style>
-            .navigasi{
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-                color: white;
-                transition: 1s;
-                background-color: rgb(39, 6, 63);
+    <style>
+        .navigasi{
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            color: white;
+            transition: 1s;
+            background-color: rgb(39, 6, 63);
             }
-            .main {
-            padding: 10px;
-            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-            }
-            .card {
-                box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-            }
-        </style>
+
+        .main {
+        padding: 10px;
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        }
+
+        .card {
+            box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        }
+        .card:hover {
+            top: -10px;
+        }
+    </style>
     
     <div class="container mx-auto flex justify-center items-center ">
         <div class="navigasi p-2 rounded-full flex justify-center items-center gap-2">
@@ -44,6 +49,8 @@
             </div>
             {% endfor %}
         </div>
-       
+    </div>
+        
+        {% include 'footer.html' %} 
 
 {% endblock content %}

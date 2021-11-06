@@ -6,7 +6,7 @@
 
 {% block content %}
     <style>
-        .card ,.nav  {
+        .card ,.nav ,.nmb {
             box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
         
         }
@@ -22,21 +22,6 @@
             transition: 1s;
             background-color: rgb(39, 6, 63);
         }
-        .slug {
-            margin-top: 20px;
-            /* padding: 6px; */
-            background: linear-gradient(rgb(82, 5, 62),rgb(18, 1, 37));
-            color: white;
-            padding: 10px;
-            font-size: medium;
-            transition: 2s;
-        }
-        .slug:hover {
-            transition: 2s;
-            background: white;
-            color:rgb(18, 1, 37) ;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-        }
         .text{
             backdrop-filter: blur(6px);
         }
@@ -44,10 +29,12 @@
             background: linear-gradient(rgb(201, 201, 238),rgb(149, 149, 226));
             box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
         }
+        .page {
+            background: linear-gradient(rgb(43, 34, 59),rgb(80, 36, 61));
+        }
         .page:hover {
-            color: orange;
-            background-color: white;
-            font-weight: bold;
+            color: rgb(80, 36, 61);
+            background: white;
             border: 1px solid;
         }
         .banner {
@@ -92,7 +79,7 @@
                         <div class="flex flex-row gap-2 mb-4 border-b-2 pb-1">
                             <div class="">
                                 {% if ter.images %}
-                                <img class="rounded-md" src="{{ ter.images.url }}" alt="" width="200px">
+                                <img class="rounded-md" src="{{ ter.images.url }}" alt="" width="500px">
                                 {% endif %}
                             </div>
                             <div class="">
@@ -102,10 +89,7 @@
                         {% endfor %}
                     </div>
                 </div>
-              
-              
             </div>
-
         </div>
     </div>
     
@@ -125,22 +109,24 @@
             {% endfor %}
         </div>
         <!-- Pagination -->
-        <div class="flex justify-center p-3 items-stretch">
-            <span class=" border-2 p-3">
+        <div class="flex justify-center p-3 ">
+            <span class="p-3">
                 {% if blog.has_previous %}
-                    <a class="page text-sm bg-yellow-600 text-white p-1 rounded-lg" href="?page={{ blog.previous_page_number }}">Sebelumnya</a>
+                    <a class="page text-sm text-white p-1 rounded-lg" href="?page={{ blog.previous_page_number }}">Sebelumnya</a>
                 {% endif %}
         
-                <span class="p-2 rounded-lg">
-                    Halaman {{ blog.number }} dari {{ blog.paginator.num_pages }}
+                <span class="nmb mx-3 text-sm p-1 rounded-lg">
+                    {{ blog.number }} | {{ blog.paginator.num_pages }} 
                 </span>
         
                 {% if blog.has_next %}
                 
-                    <a class="page text-sm bg-yellow-600 text-white p-1 rounded-lg" href="?page={{ blog.next_page_number }}">Selanjutnya</a>
+                    <a class="page text-sm text-white p-1 rounded-lg" href="?page={{ blog.next_page_number }}">Selanjutnya</a>
                 {% endif %}
             </span>
+        </div>
     </div>
-   
+    
+    {% include 'footer.html' %} 
 {% endblock content %}
     

@@ -36,7 +36,7 @@
         background:none;
     }
 
-    i {
+    .logo {
         position: absolute;
         top: 10px;
         left: 20px;
@@ -67,15 +67,15 @@
             <div class="relative z-50">
                 <form action="" method="post">
                     {% csrf_token %}
-                    <i class="fas fa-search"></i><input class="border-opacity-0 focus:border-opacity-5  w-28 text-center md:w-full h-9" type="text" name="cari" placeholder="  Search">
+                    <i class="logo fas fa-search"></i><input class="border-opacity-0 focus:border-opacity-5  w-28 text-center md:w-full h-9" type="text" name="cari" placeholder="  Search">
                 </form>
             </div>
     </div>    
-    <script>
+    <!-- <script>
         const nav = document.querySelector('.nav');
         window.addEventListener('scroll',() => {
             nav.style.border = 'none';
         });
-    </script>
+    </script> -->
 </body>
 </html>
