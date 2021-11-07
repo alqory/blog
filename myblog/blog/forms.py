@@ -1,5 +1,5 @@
 from django import forms
-from django.forms.widgets import TextInput
+from django.forms.widgets import TextInput, Textarea
 from .models import *
 
 class blogForm(forms.ModelForm):
@@ -13,11 +13,11 @@ class commentForm(forms.ModelForm):
         fields = ['name','text']
         widgets = {
             'name' : TextInput(attrs={
-                'class': 'grid grid-cols-1 rounded-lg w-full  p-1 bg-white outline-none focus:border-blue-300',
+                'class': 'grid grid-cols-1 rounded-lg w-full p-1 bg-white outline-none focus:border-blue-300',
                 'placeholder': 'Nama Lengkap'
             }),
-            'text' : TextInput(attrs={
-                'class': 'grid grid-cols-1 rounded-lg w-full p-7 border-2 focus:border-blue-300',
+            'text' : Textarea(attrs={
+                'class': 'grid grid-cols-1 rounded-lg w-full p-1 border-2 focus:border-blue-300',
                 'placeholder' : 'Your comment . . .'
             })
         }
