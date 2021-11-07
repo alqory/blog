@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import *
+from .models import blog
 from .forms import *
+from .decorators import *
 from django.core.paginator import Paginator
 import requests
 import math
@@ -59,10 +60,10 @@ def index(request):
         'banner2':banner2
         }
 
-
+    print(request.user)
     return render(request,'index.html',context)
 
-
+@allowed_users(allowed_role=['admin'])
 def tambah(request):
 
     form = blogForm()
@@ -77,6 +78,7 @@ def tambah(request):
     }
     return render(request,'tambah.html',context)
 
+@allowed_users(allowed_role=['admin'])
 def update(request, id):
     data = blog.objects.get(id=id)
     
@@ -93,23 +95,30 @@ def update(request, id):
     }
     return render(request,'update.html',context)
 
+@allowed_users(allowed_role=['admin'])
 def hapus(request,id):
     data = blog.objects.get(id=id)
     data.delete()
     return redirect('blog:index')
 
-def detail_post(request,slug_input):
 
+def detail_post(request,slug_input):
     
     blogs = blog.objects.get(slug=slug_input)
+    comment = commentSession.objects.filter(blogs=blogs).order_by('time')
     terkait = blog.objects.all().order_by('-create')[1:6]
     # 
+    
     if request.method == 'POST':
-        formComment = commentForm(request.POST)
+        new_comment = None
+        formComment = commentForm(request.POST or None)
         if formComment.is_valid():
-            obj = formComment.save(commit=False)
-            obj.blog = blogs
-            obj.save()
+            # Create Comment object but don't save to database yet  
+            new_comment = formComment.save(commit=False)
+            #  # Assign the current post to the comment
+            new_comment.blogs = blogs
+            # # Save the comment to the database
+            new_comment.save()
 
             return redirect('blog:detail', slug_input)
     else :
@@ -119,6 +128,7 @@ def detail_post(request,slug_input):
         'post':blogs,
         'comment':formComment,
         'terkait':terkait,
+        'listComments':comment,
     }
 
     return render(request,'detail_post.html',context)
@@ -129,12 +139,9 @@ def kategories(request,Kategori_input):
     q = kategori.objects.filter(id=Kategori_input)
     kategoris = blog.objects.filter(category=Kategori_input)
 
-
-
     context = {
         'kat':kategoris,
         'title':q
         }
-
 
     return render(request,'kategori_post.html',context)

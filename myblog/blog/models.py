@@ -26,9 +26,10 @@ class blog(models.Model):
         ordering = ['-create']
 
     def save(self, *args, **kwargs):
-        if len(self.title) > 50:
-            content = slugify(self.title) 
-        self.slug = content
+        # if len(self.title) > 50:
+        #     content = slugify(self.title) 
+        # self.slug = content
+        self.slug = slugify(self.title)
         super(blog, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -36,10 +37,11 @@ class blog(models.Model):
 
 
 class commentSession(models.Model):
-    blog = models.ForeignKey(blog,related_name='comments', on_delete=models.CASCADE)
+    blogs = models.ForeignKey(blog,related_name='comments',on_delete=models.CASCADE)
+    location = models.CharField(max_length=30,default='')
     name = models.CharField(max_length=50)
     text = models.TextField(max_length=120)
     time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "{} - {}".format(self.name, self.blog)
+        return f'{self.name} - {self.blogs}'
