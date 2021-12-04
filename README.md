@@ -1,1 +1,1 @@
-Blog bangun dengam Django(Backend) & Tailwindcss(Frontend)
+Blog bangun dengan Django (Backend) & Tailwindcss (Frontend)
