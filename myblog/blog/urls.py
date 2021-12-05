@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import *
 
 app_name ='blog'
 
@@ -10,4 +11,8 @@ urlpatterns = [
     path('hapus/<id>',views.hapus,name='hapus'),
     path('detail/<slug_input>',views.detail_post,name='detail'),
     path('kategori/<Kategori_input>',views.kategories,name='kategori'),
+
+    # factory
+
+    path('home1',BlogIndex.as_view(), name='home')
 ]

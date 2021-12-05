@@ -5,6 +5,8 @@ from .decorators import *
 from django.core.paginator import Paginator
 import requests
 import math
+
+from django.views.generic import ListView
 # Create your views here.
 
 def index(request):
@@ -145,3 +147,36 @@ def kategories(request,Kategori_input):
         }
 
     return render(request,'kategori_post.html',context)
+
+# Refactory code
+
+class BlogIndex(ListView):
+    model               = blog
+    context_object_name ='artikel_list'
+    template_name       = 'blog/index.html'
+    ordering            = ['-create']
+
+    def get_queryset(self):
+        return blog.objects.all()[3:]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['kategori'] = kategori.objects.all()
+        context['banner'] = blog.objects.all()[0]
+        context['banner2'] = blog.objects.all()[1:3]
+        context['data'] = self.get_data()
+        return context 
+  
+    def get_data(self):
+        city = 'Pontianak'
+        url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid=ebdd290488e624510dd716d774523aaa'
+        data = requests.get(url).json()
+        pypload = {
+        'kota':data['name'],
+        'ikon':data['weather'][0]['icon'],
+        'kecepatan_angin':data['wind']['speed'],
+        'temperatur': math.ceil(data['main']['temp'] - 273), #Celcius 
+        'tekanan_udara':data['main']['pressure'],
+        'kondisi':data['weather'][0]['main']
+        }
+        return pypload

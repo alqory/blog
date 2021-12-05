@@ -22,9 +22,6 @@ class blog(models.Model):
     slug            = models.SlugField(max_length=225)
 
 
-    class Meta:
-        ordering = ['-create']
-
     def save(self, *args, **kwargs):
         # if len(self.title) > 50:
         #     content = slugify(self.title) 

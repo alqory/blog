@@ -1,0 +1,139 @@
+{% extends 'base1.html' %}
+
+{% block title %}
+    Home
+{% endblock title%}
+
+{% block content %}
+    <style>
+        .card ,.nav ,.nmb {
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        
+        }
+        .main {
+            padding: 10px;
+            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        }
+        .card:hover {
+            top: -10px;
+        }
+        .nav a:hover {
+            color: white;
+            transition: 1s;
+            background-color: rgb(39, 6, 63);
+        }
+        .text{
+            backdrop-filter: blur(6px);
+        }
+        .cuaca {
+            background: linear-gradient(rgb(201, 201, 238),rgb(149, 149, 226));
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        }
+        .page {
+            background: linear-gradient(rgb(43, 34, 59),rgb(80, 36, 61));
+        }
+        .page:hover {
+            color: rgb(80, 36, 61);
+            background: white;
+            border: 1px solid;
+        }
+        .banner {
+            backdrop-filter: blur(1px);
+        }
+    </style>
+    <div class="container mx-auto flex justify-center items-center ">
+        <div class="nav p-2 rounded-full flex justify-center items-center gap-2">
+        {% for DataKategori in kategori %}
+            <a class="relative rounded-full  md:p-1" href="">{{DataKategori.name}}</a>      
+        {% endfor %}
+        </div>
+    </div>
+    
+    <div class="my-auto mx-2 mt-11 xl:mx-36 ">
+        <div class="flex justify-center items-center flex-col xl:flex-row xl:justify-around gap-2">
+            <div class="relative w-full xl:w-4/6">
+                {% if banner.images %}
+                <img class="opacity-40" src="{{ banner.images.url }}" alt="" width="100%">
+                <div class="relative -top-3">
+                    <a href="{% url 'blog:detail' banner.slug %}"><p class="banner p-2 absolute bottom-2 text-black text-base  hover:underline sm:text-4xl">{{banner.title}} | {{banner.author}}</p></a>
+                </div>     
+                {% endif %}
+            </div>
+            
+            <div class="w-full xl:w-2/6 ">
+                <div class="flex flex-row gap-4 xl:flex-col">
+                    <div class="cuaca flex flex-col rounded-md sm:flex-row">
+                        <div class="hidden sm:block">
+                            <img class="" src="http://openweathermap.org/img/wn/{{data.ikon}}.png" alt="" width="100px">
+                        </div>
+                        <div class="p-1">
+                            <p class=" font-bold">{{data.kota}} ({{data.kondisi}})</p>
+                            <p class="">Temperatur : {{data.temperatur}} °C</p>
+                            <p class="">Kecepatan Angin : {{data.kecepatan_angin}} m/detik</p>
+                            <p class="">Tekanan Udara : {{data.tekanan_udara}} hPa</p>
+                        </div>
+                    </div>
+                    <div class="">
+                        {% for bannerDua in banner2 %}
+                        <div class="flex flex-row gap-2 mb-4 border-b-2 pb-1">
+                            <div class="">
+                                {% if bannerDua.images %}
+                                <img class="rounded-md" src="{{ bannerDua.images.url }}" alt="" width="500px">
+                                {% endif %}
+                            </div>
+                            <div class="">
+                                <a href="{% url 'blog:detail' bannerDua.slug %}"><p class="text-sm hover:underline">{{bannerDua.title}}</p></a>
+                                <p class="text-sm float-right mt-2 opacity-60">{{ bannerDua.create|date }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="main container mx-auto mt-10 ">
+       <p class="text-lg font-semibold "> {{Kata}}</p> 
+       
+        <div class="grid grid-cols-2 my-9 gap-4 justify-items-center relative md:grid-cols-4">
+            {% for content in artikel_list %}
+            <div class="card relative block">
+                    {% if content.images %}
+                    <img class="rounded-md" src="{{ content.images.url }}" width="315px">                  
+                    {% endif %}
+                    <div class="flex justify-around mt-2 opacity-40 font-light">
+                        <p>{{ content.category }}</p>
+                        <p>{{ content.create }}</p>
+                        <p></p>
+                    </div>
+                    <h1 class="mt-3 px-2  text-black text-md font-bold">{{content.title}}</h1>
+                    <a class="" href="{% url 'blog:detail' content.slug %}">
+                    <p class="p-2 hover:underline ">{{ content.describ |truncatechars:90|striptags }}</p>
+                    </a>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Pagination -->
+        <div class="flex justify-center p-3 ">
+            <span class="p-3">
+                {% if blog.has_previous %}
+                    <a class="page text-sm text-white p-1 rounded-lg" href="?page={{ blog.previous_page_number }}">Sebelumnya</a>
+                {% endif %}
+        
+                <span class="nmb mx-3 text-sm p-1 rounded-lg">
+                    {{ blog.number }} | {{ blog.paginator.num_pages }} 
+                </span>
+        
+                {% if blog.has_next %}
+                
+                    <a class="page text-sm text-white p-1 rounded-lg" href="?page={{ blog.next_page_number }}">Selanjutnya</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+    
+    {% include 'footer.html' %} 
+{% endblock content %}
+    
