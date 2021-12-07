@@ -15,7 +15,7 @@ class blog(models.Model):
     author          = models.CharField(max_length=50)
     describ         = RichTextField(blank=True, null=True)
     images          = models.ImageField(upload_to='cover/',null=True)
-    category        = models.ForeignKey(kategori,related_name='categories',on_delete=models.CASCADE)
+    category        = models.ForeignKey('kategori',related_name='categories',on_delete=models.CASCADE)
     is_recomended   = models.BooleanField(default=False)
     create          = models.DateTimeField(auto_now_add=True)
     update          = models.DateTimeField(auto_now=True)

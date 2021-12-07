@@ -1,4 +1,4 @@
-{% extends 'base1.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
     Home
@@ -44,7 +44,7 @@
     <div class="container mx-auto flex justify-center items-center ">
         <div class="nav p-2 rounded-full flex justify-center items-center gap-2">
         {% for DataKategori in kategori %}
-            <a class="relative rounded-full  md:p-1" href="">{{DataKategori.name}}</a>      
+            <a class="relative rounded-full  md:p-1" href="{% url 'blog:kategori' DataKategori.id %}">{{ DataKategori.name }}</a>      
         {% endfor %}
         </div>
     </div>
@@ -60,7 +60,7 @@
                 {% endif %}
             </div>
             
-            <div class="w-full xl:w-2/6 ">
+            <div class="w-full xl:w-2/6  ">
                 <div class="flex flex-row gap-4 xl:flex-col">
                     <div class="cuaca flex flex-col rounded-md sm:flex-row">
                         <div class="hidden sm:block">
